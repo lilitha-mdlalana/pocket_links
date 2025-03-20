@@ -29,7 +29,7 @@ import {
   FiPlus,
 } from 'react-icons/fi'
 import React from 'react'
-import { LinkItemProps, SidebarProps, NavItemProps, MobileProps } from './types'
+import { LinkItemProps, SidebarProps, NavItemProps, MobileProps } from '../../../../types/types'
 import Link from 'next/link'
 
 const LinkItems: Array<LinkItemProps> = [
