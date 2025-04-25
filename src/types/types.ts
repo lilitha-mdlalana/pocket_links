@@ -19,3 +19,35 @@ export interface MobileProps extends FlexProps {
 export interface SidebarProps extends BoxProps {
   onClose: () => void
 }
+
+
+export interface User {
+  id: string;
+  name?: string | null;
+  email: string;
+  emailVerified?: Date | null;
+  image?: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  userId: string;
+}
+
+export interface Link {
+  id: string;
+  url: string;
+  title?: string | null;
+  description?: string | null;
+  createdAt: Date | string;
+  categoryId?: string | null;
+  userId: string;
+  category?: Category | null;
+}
+
+export interface HomeProps {
+  links: Link[];
+}
