@@ -40,8 +40,8 @@ export interface Category {
 export interface Link {
   id: string;
   url: string;
-  title?: string | null;
-  description?: string | null;
+  title: string;
+  description: string;
   createdAt: Date | string;
   categoryId?: string | null;
   userId: string;

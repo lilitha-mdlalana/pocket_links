@@ -1,7 +1,5 @@
 import Head from "next/head";
-import { Poppins, Geist_Mono } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import prisma from "@/lib/prisma";
 import { HomeProps } from "@/types/types";
 import { getServerSession } from "next-auth/next";
@@ -9,17 +7,6 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  subsets: ["latin"],
-});
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session: Session | null = await getServerSession(
@@ -81,28 +68,35 @@ export default function Home({ links }: HomeProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={`${poppins.className}`}>
+      <div>
         <Text as={"h1"} fontWeight={"bold"} fontSize={"3xl"}>
           Your Links
         </Text>
-        <SimpleGrid as={"div"} minChildWidth={"320px"} spacing={4} mt={4}>
-          {/* {links &&
+        <Grid
+          as={"div"}
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
+          gap={4}
+          mt={4}
+        >
+          {links &&
             links.map((link) => (
               <>
-                <LinkCard />
-                <LinkCard />
-                <LinkCard />
+                <LinkCard
+                  key={link.id}
+                  title={link.title || ""}
+                  description={link.description || ""}
+                  category={link.category?.name || "Uncategorized"}
+                  linkUrl={link.url}
+                  onEdit={() => console.log(`Edit link with id: ${link.id}`)}
+                  onPin={() => console.log(`Pin link with id: ${link.id}`)}
+                />
               </>
-            ))} */}
-            <>
-            <LinkCard />
-            <LinkCard />
-            <LinkCard />
-            <LinkCard />
-            <LinkCard />
-            <LinkCard />
-            </>
-        </SimpleGrid>
+            ))}
+        </Grid>
       </div>
     </>
   );
