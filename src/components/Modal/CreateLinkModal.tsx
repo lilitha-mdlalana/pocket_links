@@ -55,7 +55,7 @@ const CreateLinkModal = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [toast]);
 
   const initialValues = {
     title: "",
