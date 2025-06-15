@@ -1,8 +1,5 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🔍 Running linter..."
-bunx eslint . --ext .ts,.tsx,.js,.jsx || exit 1
+bun run lint
 
 echo "🎨 Checking formatting..."
-bunx prettier --check . || exit 1
+bun run format
