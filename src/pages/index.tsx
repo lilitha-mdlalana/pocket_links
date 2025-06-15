@@ -3,7 +3,7 @@ import { Grid, Text, Button, HStack, VStack, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import prisma from "@/lib/prisma";
-import { HomeProps } from "@/types/types";
+import { HomeProps, SerializedLink } from "@/types/types";
 import { getServerSession } from "next-auth/next";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
@@ -206,7 +206,7 @@ export default function Home({ links, pagination, error }: HomePageProps) {
               gap={4}
               mt={4}
             >
-              {links.map((link) => (
+              {links.map((link: SerializedLink) => (
                 <LinkCard
                   key={link.id}
                   title={link.title || ""}

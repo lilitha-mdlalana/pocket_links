@@ -77,3 +77,13 @@ export interface SerializedLink {
 export interface HomeProps {
   links: SerializedLink[];
 }
+
+export type PrismaLink = {
+  id: string;
+  url: string;
+  title: string | null;
+  description: string | null;
+  createdAt: Date;
+  userId: string;
+  categoryId: string | null;
+};
