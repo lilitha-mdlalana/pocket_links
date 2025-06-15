@@ -18,6 +18,7 @@ import { getSession } from "next-auth/react";
 import prisma from "@/lib/prisma";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
 import { SerializedLink } from "@/types/types";
+import { Link as PrismaLink } from "@prisma/client";
 
 interface CategoryPageProps {
   links: SerializedLink[];
@@ -47,7 +48,7 @@ export default function CategoryPage({
     setLoading(true);
     try {
       await router.push(
-        `/category/${encodeURIComponent(category.name)}?page=${page}`,
+        `/category/${encodeURIComponent(category.name)}?page=${page}`
       );
     } catch (err) {
       console.error("Navigation error:", err);
@@ -204,24 +205,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       include: { category: { select: { name: true } } },
     });
 
-    const serializedLinks = links.map(
-      (
-        link,
-      ): {
-        createdAt: string;
-        category: { name: string } | null;
-        id: string;
-        url: string;
-        title: string | null;
-        description: string | null;
-        userId: string;
-        categoryId: string | null;
-      } => ({
-        ...link,
-        createdAt: link.createdAt.toISOString(),
-        category: link.category ? { ...link.category } : null,
-      }),
-    );
+    
+    const serializedLinks = links.map((link: PrismaLink) => ({
+      createdAt: link.createdAt.toISOString(),
+      category: link.categoryId,
+      title: link.title,
+      description: link.description,
+      url: link.url,
+      id: link.id
+    }));
 
     return {
       props: {
