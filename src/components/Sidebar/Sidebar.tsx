@@ -22,6 +22,8 @@ import {
   Collapse,
   List,
   ListItem,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { FiHome, FiMenu, FiChevronDown, FiChevronRight } from "react-icons/fi";
 import { MdPushPin, MdCategory } from "react-icons/md";
@@ -35,24 +37,18 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import CreateLinkModal from "../Modal/CreateLinkModal";
 import { useState } from "react";
+import { useCategories } from "@/hooks/useCategories";
 
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, href: "/" },
   { name: "Pinned", icon: MdPushPin, href: "/pinned" },
 ];
 
-// This would come from your database or API
-const UserCategories: Array<{name: string, href: string}> = [
-  { name: "Work", href: "/category/work" },
-  { name: "Personal", href: "/category/personal" },
-  { name: "Learning", href: "/category/learning" },
-  { name: "Entertainment", href: "/category/entertainment" },
-];
-
 const CategorySection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
-  
+  const { categories, isLoading, error } = useCategories();
+
   return (
     <Box ml={4} mr={4} mt={2}>
       <Flex
@@ -84,26 +80,38 @@ const CategorySection = () => {
           transformOrigin="center"
         />
       </Flex>
-      
+
       <Collapse in={isOpen} animateOpacity>
         <List spacing={2} pl={6} pt={2} pb={2}>
-          {UserCategories.map((category) => (
-            <ListItem key={category.name}>
-              <Link href={category.href}>
-                <Text
-                  p={2}
-                  borderRadius="md"
-                  _hover={{
-                    bg: "purple.400",
-                    color: "white",
-                  }}
-                  cursor="pointer"
-                >
-                  {category.name}
-                </Text>
-              </Link>
-            </ListItem>
-          ))}
+          {isLoading && (
+            <Center>
+              <Spinner size="sm" />
+            </Center>
+          )}
+          {error && (
+            <Text color="red.500" fontSize="sm" pl={2}>
+              {error}
+            </Text>
+          )}
+          {!isLoading &&
+            !error &&
+            categories.map((category) => (
+              <ListItem key={category.id}>
+                <Link href={`/category/${category.name}`}>
+                  <Text
+                    p={2}
+                    borderRadius="md"
+                    _hover={{
+                      bg: "purple.400",
+                      color: "white",
+                    }}
+                    cursor="pointer"
+                  >
+                    {category.name}
+                  </Text>
+                </Link>
+              </ListItem>
+            ))}
         </List>
       </Collapse>
     </Box>
@@ -134,8 +142,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           <Link href={link.href}>{link.name}</Link>
         </NavItem>
       ))}
-      
-      {/* Add the collapsible categories section */}
+
       <CategorySection />
     </Box>
   );

@@ -14,13 +14,13 @@ const poppins = Poppins({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
-    <ChakraProvider >
-      <SidebarWithHeader>
-        <main className={poppins.className}>
-        <Component {...pageProps} />
-        </main>
-      </SidebarWithHeader>
-    </ChakraProvider>
+      <ChakraProvider>
+        <SidebarWithHeader>
+          <main className={poppins.className}>
+            <Component {...pageProps} />
+          </main>
+        </SidebarWithHeader>
+      </ChakraProvider>
     </SessionProvider>
   );
 }

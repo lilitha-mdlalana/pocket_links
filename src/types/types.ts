@@ -1,25 +1,24 @@
-import { FlexProps, BoxProps } from "@chakra-ui/react"
-import { IconType } from "react-icons"
+import { FlexProps, BoxProps } from "@chakra-ui/react";
+import { IconType } from "react-icons";
 
 export interface LinkItemProps {
-  name: string
-  icon: IconType,
-  href: string
+  name: string;
+  icon: IconType;
+  href: string;
 }
 
 export interface NavItemProps extends FlexProps {
-  icon: IconType
-  children: React.ReactNode
+  icon: IconType;
+  children: React.ReactNode;
 }
 
 export interface MobileProps extends FlexProps {
-  onOpen: () => void
+  onOpen: () => void;
 }
 
 export interface SidebarProps extends BoxProps {
-  onClose: () => void
+  onClose: () => void;
 }
-
 
 export interface User {
   id: string;
@@ -48,6 +47,33 @@ export interface Link {
   category?: Category | null;
 }
 
+export interface PaginationInfo {
+  currentPage: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  nextCursor: string | null;
+  prevCursor: string | null;
+  totalCount: number;
+  totalPages: number;
+}
+
+export interface PaginatedLinks {
+  links: SerializedLink[];
+  pagination: PaginationInfo;
+}
+
+export interface SerializedLink {
+  id: string;
+  title: string | null;
+  description: string | null;
+  url: string;
+  createdAt: string;
+  category: {
+    id: string;
+    name: string;
+  } | null;
+}
+
 export interface HomeProps {
-  links: Link[];
+  links: SerializedLink[];
 }

@@ -28,7 +28,7 @@ const CreateLinkModal = () => {
   const toast = useToast();
   const router = useRouter();
   const [categories, setCategories] = useState<{ id: string; name: string }[]>(
-    []
+    [],
   );
   const [loading, setLoading] = useState(false);
 

@@ -1,7 +1,5 @@
 const Pinned = () => {
-  return (
-    <div>Pinned</div>
-  )
-}
+  return <div>Pinned</div>;
+};
 
-export default Pinned
+export default Pinned;
