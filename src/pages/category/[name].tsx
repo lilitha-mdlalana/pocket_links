@@ -48,7 +48,7 @@ export default function CategoryPage({
     setLoading(true);
     try {
       await router.push(
-        `/category/${encodeURIComponent(category.name)}?page=${page}`
+        `/category/${encodeURIComponent(category.name)}?page=${page}`,
       );
     } catch (err) {
       console.error("Navigation error:", err);
@@ -205,14 +205,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       include: { category: { select: { name: true } } },
     });
 
-    
     const serializedLinks = links.map((link: PrismaLink) => ({
       createdAt: link.createdAt.toISOString(),
       category: link.categoryId,
       title: link.title,
       description: link.description,
       url: link.url,
-      id: link.id
+      id: link.id,
     }));
 
     return {
