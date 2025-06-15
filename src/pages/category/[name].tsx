@@ -116,7 +116,7 @@ export default function CategoryPage({
             gap={4}
             mb={8}
           >
-            {links.map((link) => (
+            {links.map((link: SerializedLink) => (
               <LinkCard
                 key={link.id}
                 title={link.title || "Untitled"}

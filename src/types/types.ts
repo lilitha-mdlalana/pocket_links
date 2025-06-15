@@ -38,13 +38,12 @@ export interface Category {
 
 export interface Link {
   id: string;
+  title?: string;
+  description?: string;
   url: string;
-  title: string;
-  description: string;
-  createdAt: Date | string;
-  categoryId?: string | null;
-  userId: string;
-  category?: Category | null;
+  category?: {
+    name?: string;
+  };
 }
 
 export interface PaginationInfo {
