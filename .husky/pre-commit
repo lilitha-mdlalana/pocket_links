@@ -3,3 +3,6 @@ bun run lint
 
 echo "🎨 Checking formatting..."
 bun run format
+
+echo "⚒️ Running build..."
+bun run build
