@@ -9,7 +9,7 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
-
+import { Link as PrismaLink } from "@prisma/client";
 const LINKS_PER_PAGE = 12;
 
 interface PaginationInfo {
@@ -69,12 +69,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       take: LINKS_PER_PAGE,
     });
 
-    const serializedLinks = links.map((link) => ({
+    const serializedLinks = links.map((link: PrismaLink) => ({
       ...link,
       createdAt: link.createdAt.toISOString(),
-      category: link.category
+      category: link.categoryId
         ? {
-            ...link.category,
+            ...link,
           }
         : null,
     }));

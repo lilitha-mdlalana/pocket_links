@@ -17,7 +17,8 @@ import Link from "next/link";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prisma";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
-import { PrismaLink, SerializedLink } from "@/types/types";
+import { SerializedLink } from "@/types/types";
+import { Link as PrismaLink } from "@prisma/client";
 
 interface CategoryPageProps {
   links: SerializedLink[];
@@ -205,12 +206,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
 
     const serializedLinks = links.map((link: PrismaLink) => ({
+      ...link,
       createdAt: link.createdAt.toISOString(),
-      category: link.categoryId,
-      title: link.title,
-      description: link.description,
-      url: link.url,
-      id: link.id,
+      category: link.categoryId
+        ? {
+            ...link,
+          }
+        : null,
     }));
 
     return {
