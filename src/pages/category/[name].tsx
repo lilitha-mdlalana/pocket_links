@@ -161,14 +161,14 @@ export default function CategoryPage({
 }
 
 type PrismaLink = {
-    id: string;
-    url: string;
-    title: string | null;
-    description: string | null;
-    createdAt: Date;
-    userId: string;
-    categoryId: string | null;
-} 
+  id: string;
+  url: string;
+  title: string | null;
+  description: string | null;
+  createdAt: Date;
+  userId: string;
+  categoryId: string | null;
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
