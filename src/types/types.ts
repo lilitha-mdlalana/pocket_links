@@ -37,7 +37,7 @@ export interface Category {
 }
 
 export interface Link {
-  createdAt: any;
+  createdAt: unknown;
   id: string;
   title?: string;
   description?: string;
