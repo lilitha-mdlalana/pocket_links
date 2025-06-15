@@ -1,8 +1,8 @@
 echo "🔍 Running linter..."
-bun run lint
+yarn run lint
 
 echo "🎨 Checking formatting..."
-bun run format
+yarn run format
 
 echo "⚒️ Running build..."
-bun run build
+yarn run build
