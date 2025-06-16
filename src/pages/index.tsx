@@ -9,6 +9,7 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
+
 const LINKS_PER_PAGE = 12;
 
 interface PaginationInfo {

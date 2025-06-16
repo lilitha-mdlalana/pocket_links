@@ -1,8 +1,0 @@
-echo "🔍 Running linter..."
-yarn run lint
-
-echo "🎨 Checking formatting..."
-yarn run format
-
-echo "⚒️ Running build..."
-yarn run build

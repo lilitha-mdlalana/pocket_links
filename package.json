@@ -8,7 +8,8 @@
     "start": "next start",
     "prepare": "yarn husky install",
     "lint": "next lint",
-    "format": "yarn prettier --write ."
+    "format": "yarn prettier --write .",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.4.2",
@@ -33,7 +34,6 @@
     "eslint": "^9.29.0",
     "eslint-config-next": "15.2.3",
     "formik": "^2.4.6",
-    "husky": "^8.0.0",
     "prettier": "^3.5.3",
     "prisma": "^6.5.0",
     "typescript": "^5"
