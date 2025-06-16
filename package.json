@@ -6,10 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "prepare": "yarn husky install",
     "lint": "next lint",
     "format": "yarn prettier --write .",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --schema=src/prisma/schema.prisma"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.4.2",
