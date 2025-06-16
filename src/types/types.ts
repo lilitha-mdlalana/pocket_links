@@ -1,4 +1,5 @@
 import { FlexProps, BoxProps } from "@chakra-ui/react";
+import { Prisma } from "@prisma/client";
 import { IconType } from "react-icons";
 
 export interface LinkItemProps {
@@ -77,3 +78,11 @@ export interface SerializedLink {
 export interface HomeProps {
   links: SerializedLink[];
 }
+
+export type LinkWithCategory = Prisma.LinkGetPayload<{
+  include: { category: true };
+}>;
+
+export type LinkWithCategoryName = Prisma.LinkGetPayload<{
+  include: { category: { select: { name: true } } };
+}>;

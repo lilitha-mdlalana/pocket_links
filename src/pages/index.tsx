@@ -3,13 +3,12 @@ import { Grid, Text, Button, HStack, VStack, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import prisma from "@/lib/prisma";
-import { HomeProps, SerializedLink } from "@/types/types";
+import { HomeProps, LinkWithCategory, SerializedLink } from "@/types/types";
 import { getServerSession } from "next-auth/next";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
-import { Link as PrismaLink } from "@prisma/client";
 const LINKS_PER_PAGE = 12;
 
 interface PaginationInfo {
@@ -69,14 +68,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       take: LINKS_PER_PAGE,
     });
 
-    const serializedLinks = links.map((link: PrismaLink) => ({
+    const serializedLinks = links.map((link: LinkWithCategory) => ({
       ...link,
       createdAt: link.createdAt.toISOString(),
-      category: link.categoryId
-        ? {
-            ...link,
-          }
-        : null,
     }));
 
     const totalPages = Math.ceil(totalCount / LINKS_PER_PAGE);

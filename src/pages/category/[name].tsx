@@ -17,8 +17,7 @@ import Link from "next/link";
 import { getSession } from "next-auth/react";
 import prisma from "@/lib/prisma";
 import { LinkCard } from "@/components/LinkCard/LinkCard";
-import { SerializedLink } from "@/types/types";
-import { Link as PrismaLink } from "@prisma/client";
+import { LinkWithCategoryName, SerializedLink } from "@/types/types";
 
 interface CategoryPageProps {
   links: SerializedLink[];
@@ -205,7 +204,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       include: { category: { select: { name: true } } },
     });
 
-    const serializedLinks = links.map((link: PrismaLink) => ({
+    const serializedLinks = links.map((link: LinkWithCategoryName) => ({
       ...link,
       createdAt: link.createdAt.toISOString(),
       category: link.categoryId
